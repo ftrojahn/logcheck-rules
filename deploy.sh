@@ -7,6 +7,15 @@ HOSTS=(
     edyta
 )
 
+# get HOSTS from cmd line or local file
+if [ -n "$1" ] ; then
+    unset HOSTS
+    HOSTS=$1
+elif [ -f hosts.local ] ; then
+    unset HOSTS
+    source hosts.local
+fi
+
 for host in ${HOSTS[*]}; do
     echo "syncing ${host}"
     rsync -av --chown=root:logcheck ignore.d.server/ root@${host}:/etc/logcheck/ignore.d.server
