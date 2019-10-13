@@ -10,6 +10,7 @@ HOSTS=(
 for host in ${HOSTS[*]}; do
     echo "syncing ${host}"
     rsync -av --chown=root:logcheck ignore.d.server/ root@${host}:/etc/logcheck/ignore.d.server
+    rsync -av --chown=root:logcheck violations.ignore.d/ root@${host}:/etc/logcheck/violations.ignore.d
 done
 
 # rsync -av --chown=root:logcheck ignore.d.server/ root@linode2:/etc/logcheck/ignore.d.server
